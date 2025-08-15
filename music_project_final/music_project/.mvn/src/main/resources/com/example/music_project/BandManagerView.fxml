@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import java.lang.String?>
+<ScrollPane xmlns:fx="http://javafx.com/fxml"
+            fitToWidth="true"
+            prefWidth="700"
+            prefHeight="750"
+            fx:controller="com.example.music_project.BandManagerController">
+    <content>
+        <VBox spacing="16" style="-fx-padding:16;">
+            <Label text="Band Manager Dashboard" style="-fx-font-size:20; -fx-font-weight:bold;"/>
+
+            <Accordion VBox.vgrow="ALWAYS">
+                <panes>
+
+                    <!-- Goal 1 -->
+                    <TitledPane text="1) Schedule a Concert Tour">
+                        <content>
+                            <VBox spacing="10" style="-fx-padding:12;">
+                                <GridPane hgap="10" vgap="10">
+                                    <columnConstraints>
+                                        <ColumnConstraints percentWidth="25"/>
+                                        <ColumnConstraints percentWidth="75"/>
+                                    </columnConstraints>
+
+                                    <Label text="Tour Name:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                                    <TextField fx:id="tourNameField" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+                                    <Label text="Start Date:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                                    <DatePicker fx:id="startDatePicker" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+                                    <Label text="End Date:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                                    <DatePicker fx:id="endDatePicker" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+                                    <Label text="Cities (comma-separated):" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                                    <TextField fx:id="citiesField" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+
+                                    <Label text="Venues (comma-separated):" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+                                    <TextField fx:id="venuesField" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+
+                                    <Label text="Expected Audience per stop:" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+                                    <TextArea fx:id="audiencePerStopArea" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+                                </GridPane>
+
+                                <HBox spacing="8">
+                                    <Button text="Validate (VL/VR)" onAction="#validateSchedule"/>
+                                    <Button text="Generate Draft Plan (DP/OP)" onAction="#generateDraftPlan"/>
+                                    <Button text="Finalize Schedule" onAction="#finalizeSchedule"/>
+                                </HBox>
+
+                                <TextArea fx:id="tourOutputArea" editable="false" prefRowCount="6"/>
+                            </VBox>
+                        </content>
+                    </TitledPane>
+
+                    <!-- Goal 2 -->
+                    <TitledPane text="2) Review Financial Reports">
+                        <content>
+                            <VBox spacing="10" style="-fx-padding:12;">
+                                <HBox spacing="8">
+                                    <Label text="Completed Tour:"/>
+                                    <ComboBox fx:id="completedTourCombo"/>
+                                    <Button text="Load Report" onAction="#loadFinancialReport"/>
+                                    <Button text="Export PDF" onAction="#exportFinancialPdf"/>
+                                </HBox>
+                                <TextArea fx:id="financialReportArea" editable="false" prefRowCount="8"/>
+                            </VBox>
+                        </content>
+                    </TitledPane>
+
+                    <!-- Goal 3 -->
+                    <TitledPane text="3) Assign Crew">
+                        <content>
+                            <GridPane hgap="10" vgap="10" style="-fx-padding:12;">
+                                <columnConstraints>
+                                    <ColumnConstraints percentWidth="25"/>
+                                    <ColumnConstraints percentWidth="75"/>
+                                </columnConstraints>
+
+                                <Label text="Tour:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                                <ComboBox fx:id="crewTourCombo" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+                                <Label text="Sound:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                                <ComboBox fx:id="soundCombo" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+                                <Label text="Lighting:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                                <ComboBox fx:id="lightingCombo" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+                                <Label text="Transport:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                                <ComboBox fx:id="transportCombo" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+
+                                <Button text="Confirm Assignments" GridPane.rowIndex="4" GridPane.columnIndex="1"
+                                        onAction="#confirmCrewAssignments"/>
+                            </GridPane>
+                        </content>
+                    </TitledPane>
+
+                    <!-- Goal 4 -->
+                    <TitledPane text="4) Edit Existing Tour">
+                        <content>
+                            <VBox spacing="8" style="-fx-padding:12;">
+                                <DatePicker fx:id="editTourDatePicker"/>
+                                <TextField fx:id="editVenueField" promptText="New Venue"/>
+                                <TextArea fx:id="editNotesArea" promptText="Notes"/>
+                                <Button text="Submit Updates" onAction="#submitTourEdits"/>
+                            </VBox>
+                        </content>
+                    </TitledPane>
+
+                    <!-- Goal 5 -->
+                    <TitledPane text="5) Broadcast Message">
+                        <content>
+                            <VBox spacing="8" style="-fx-padding:12;">
+                                <TextField fx:id="broadcastSubjectField" promptText="Subject"/>
+                                <TextArea fx:id="broadcastBodyArea" promptText="Message body..."/>
+                                <Button text="Send Now" onAction="#sendBroadcast"/>
+                            </VBox>
+                        </content>
+                    </TitledPane>
+
+                    <!-- Goal 6 -->
+                    <TitledPane text="6) Cancel or Postpone Concert">
+                        <content>
+                            <HBox spacing="8" style="-fx-padding:12;">
+                                <DatePicker fx:id="cancelDatePicker"/>
+                                <ComboBox fx:id="cancelActionCombo">
+                                    <items>
+                                        <FXCollections fx:factory="observableArrayList">
+                                            <String fx:value="Cancel"/>
+                                            <String fx:value="Postpone"/>
+                                        </FXCollections>
+                                    </items>
+                                </ComboBox>
+                                <Button text="Confirm &amp; Notify" onAction="#confirmCancelOrPostpone"/>
+                            </HBox>
+                        </content>
+                    </TitledPane>
+
+                    <!-- Goal 7 -->
+                    <TitledPane text="7) Approve Budget">
+                        <content>
+                            <VBox spacing="8" style="-fx-padding:12;">
+                                <Button text="Load Pending Budgets" onAction="#loadBudgets"/>
+                                <TableView fx:id="budgetTable" prefHeight="200">
+                                    <columns>
+                                        <TableColumn text="Item"/>
+                                        <TableColumn text="Amount"/>
+                                        <TableColumn text="Notes"/>
+                                    </columns>
+                                </TableView>
+                                <HBox spacing="8">
+                                    <Button text="Validate Totals" onAction="#validateBudgetTotals"/>
+                                    <Button text="Approve" onAction="#approveBudget"/>
+                                    <Button text="Reject" onAction="#rejectBudget"/>
+                                </HBox>
+                            </VBox>
+                        </content>
+                    </TitledPane>
+
+                    <!-- Goal 8 -->
+                    <TitledPane text="8) Post-Tour Review">
+                        <content>
+                            <VBox spacing="8" style="-fx-padding:12;">
+                                <ComboBox fx:id="postTourCombo"/>
+                                <Button text="Load Details" onAction="#loadPostTourDetails"/>
+                                <TextArea fx:id="postTourDetailsArea" editable="false" prefRowCount="8"/>
+                                <TextArea fx:id="postTourCommentsArea" promptText="Your comments..."/>
+                                <Button text="Save Review" onAction="#savePostTourReview"/>
+                            </VBox>
+                        </content>
+                    </TitledPane>
+
+                </panes>
+            </Accordion>
+        </VBox>
+    </content>
+</ScrollPane>

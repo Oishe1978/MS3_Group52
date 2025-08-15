@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<ScrollPane xmlns:fx="http://javafx.com/fxml"
+            fitToWidth="true"
+            prefWidth="700"
+            prefHeight="750"
+            fx:controller="com.example.music_project.LeadSingerController">
+    <content>
+        <VBox spacing="16" style="-fx-padding:16;">
+            <Label text="Lead Singer Dashboard" style="-fx-font-size:20; -fx-font-weight:bold;"/>
+
+            <Accordion VBox.vgrow="ALWAYS">
+                <panes>
+
+                    <!-- Goal 1 -->
+                    <TitledPane text="1) View Upcoming Performance Schedule">
+                        <content>
+                            <VBox spacing="8" style="-fx-padding:12;">
+                                <Button text="Load Next 30 Days" onAction="#loadMySchedule"/>
+                                <TableView fx:id="scheduleTable" prefHeight="220">
+                                    <columns>
+                                        <TableColumn text="Date"/>
+                                        <TableColumn text="Type"/>
+                                        <TableColumn text="Venue"/>
+                                    </columns>
+                                </TableView>
+                            </VBox>
+                        </content>
+                    </TitledPane>
+
+                    <!-- Goal 2 -->
+                    <TitledPane text="2) Upload Recorded Demo Track">
+                        <content>
+                            <VBox spacing="8" style="-fx-padding:12;">
+                                <TextField fx:id="demoPathField" promptText="Select MP3/WAV file..."/>
+                                <HBox spacing="8">
+                                    <Button text="Validate Format" onAction="#validateDemoFormat"/>
+                                    <Button text="Upload" onAction="#uploadDemo"/>
+                                </HBox>
+                                <Label fx:id="demoStatusLabel"/>
+                            </VBox>
+                        </content>
+                    </TitledPane>
+
+                    <!-- Goal 3 -->
+                    <TitledPane text="3) Submit New Song Idea">
+                        <content>
+                            <GridPane hgap="10" vgap="10" style="-fx-padding:12;">
+                                <columnConstraints>
+                                    <ColumnConstraints percentWidth="25"/>
+                                    <ColumnConstraints percentWidth="75"/>
+                                </columnConstraints>
+                                <Label text="Title:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                                <TextField fx:id="songTitleField" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+                                <Label text="Genre:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                                <TextField fx:id="songGenreField" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+                                <Label text="Draft Lyrics:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                                <TextArea fx:id="songLyricsArea" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+                                <Button text="Submit Idea" GridPane.rowIndex="3" GridPane.columnIndex="1"
+                                        onAction="#submitSongIdea"/>
+                            </GridPane>
+                        </content>
+                    </TitledPane>
+
+                    <!-- Goal 4 -->
+                    <TitledPane text="4) Update Personal Artist Profile">
+                        <content>
+                            <VBox spacing="8" style="-fx-padding:12;">
+                                <TextArea fx:id="bioArea" promptText="Bio"/>
+                                <TextField fx:id="contactField" promptText="Contact / Social links"/>
+                                <Button text="Preview" onAction="#previewProfile"/>
+                                <Button text="Save" onAction="#saveProfile"/>
+                                <TextArea fx:id="profilePreviewArea" editable="false" prefRowCount="5"/>
+                            </VBox>
+                        </content>
+                    </TitledPane>
+
+                    <!-- Goal 5 -->
+                    <TitledPane text="5) Review Fan Feedback">
+                        <content>
+                            <VBox spacing="8" style="-fx-padding:12;">
+                                <ComboBox fx:id="feedbackTargetCombo" promptText="Select song/event"/>
+                                <Button text="Load Comments" onAction="#loadFanFeedback"/>
+                                <TextArea fx:id="fanFeedbackArea" editable="false" prefRowCount="8"/>
+                                <HBox spacing="8">
+                                    <Label text="Filter:"/>
+                                    <ComboBox fx:id="feedbackFilterCombo"/>
+                                </HBox>
+                            </VBox>
+                        </content>
+                    </TitledPane>
+
+                    <!-- Goal 6 -->
+                    <TitledPane text="6) Backstage Journal">
+                        <content>
+                            <VBox spacing="8" style="-fx-padding:12;">
+                                <TextField fx:id="journalMoodField" promptText="Mood"/>
+                                <TextArea fx:id="journalDescArea" promptText="Reflections..."/>
+                                <Button text="Save Entry" onAction="#saveJournalEntry"/>
+                            </VBox>
+                        </content>
+                    </TitledPane>
+
+                    <!-- Goal 7 -->
+                    <TitledPane text="7) Suggest Collaboration">
+                        <content>
+                            <GridPane hgap="10" vgap="10" style="-fx-padding:12;">
+                                <columnConstraints>
+                                    <ColumnConstraints percentWidth="25"/>
+                                    <ColumnConstraints percentWidth="75"/>
+                                </columnConstraints>
+                                <Label text="Guest Artist:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                                <TextField fx:id="guestArtistField" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+                                <Label text="Contact:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                                <TextField fx:id="guestContactField" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+                                <Label text="Idea:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                                <TextArea fx:id="collabIdeaArea" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+                                <Button text="Submit" GridPane.rowIndex="3" GridPane.columnIndex="1"
+                                        onAction="#submitCollaboration"/>
+                            </GridPane>
+                        </content>
+                    </TitledPane>
+
+                    <!-- Goal 8 -->
+                    <TitledPane text="8) Performance Impressions">
+                        <content>
+                            <GridPane hgap="10" vgap="10" style="-fx-padding:12;">
+                                <columnConstraints>
+                                    <ColumnConstraints percentWidth="25"/>
+                                    <ColumnConstraints percentWidth="75"/>
+                                </columnConstraints>
+                                <Label text="Date:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                                <DatePicker fx:id="reviewDatePicker" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+                                <Label text="Vocal Comfort (1-5):" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                                <Spinner fx:id="vocalComfortSpinner" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+                                <Label text="Audience Reaction (1-5):" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                                <Spinner fx:id="audienceReactionSpinner" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+                                <Label text="Stage Coordination (1-5):" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                                <Spinner fx:id="stageCoordSpinner" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+                                <Button text="Save" GridPane.rowIndex="4" GridPane.columnIndex="1"
+                                        onAction="#savePerformanceImpression"/>
+                            </GridPane>
+                        </content>
+                    </TitledPane>
+
+                </panes>
+            </Accordion>
+        </VBox>
+    </content>
+</ScrollPane>
