@@ -8,7 +8,6 @@ import javafx.scene.layout.StackPane;
 
 public class StageDirectorController {
 
-    // Buttons
     @FXML private Button btnStageLayout;
     @FXML private Button btnMovementPlan;
     @FXML private Button btnPropTeam;
@@ -36,7 +35,6 @@ public class StageDirectorController {
 
     @FXML
     public void initialize() {
-        // Button actions: show corresponding goal pane when clicked
         btnStageLayout.setOnAction(e -> showGoal(1));
         btnMovementPlan.setOnAction(e -> showGoal(2));
         btnPropTeam.setOnAction(e -> showGoal(3));
@@ -61,7 +59,6 @@ public class StageDirectorController {
         goal7Pane.setVisible(goalNumber == 7);
         goal8Pane.setVisible(goalNumber == 8);
 
-        // Optionally print goal info to console
         printGoalInfo(goalNumber);
     }
 
