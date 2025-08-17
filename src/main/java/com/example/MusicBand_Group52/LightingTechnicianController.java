@@ -34,7 +34,7 @@ public class LightingTechnicianController {
 
     @FXML
     public void initialize() {
-        // Assign button handlers
+        
         btnSetupLighting.setOnAction(e -> handleGoalAction(1));
         btnTestRehearsal.setOnAction(e -> handleGoalAction(2));
         btnBackupPlan.setOnAction(e -> handleGoalAction(3));
