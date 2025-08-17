@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.geometry.*?>
 
-<BorderPane xmlns:fx="http://javafx.com/fxml/1"
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.example.MusicBand_Group52.LightingTechnicianController"
             prefWidth="900" prefHeight="700">
 
@@ -81,6 +81,4 @@
         </StackPane>
     </center>
 
-</BorderPane>
-
-
+</AnchorPane>

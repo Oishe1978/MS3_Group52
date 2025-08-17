@@ -8,6 +8,7 @@ import javafx.stage.Stage;
 
 public class HelloApplication extends Application {
     @Override
+
     public void start(Stage stage) throws Exception {
         var url = HelloApplication.class.getResource("/com/example/MusicBand_Group52/hello-view.fxml");
         if (url == null) throw new IllegalStateException("FXML not found on classpath");
